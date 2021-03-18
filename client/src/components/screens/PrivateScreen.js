@@ -4,6 +4,7 @@ import axios from 'axios';
 const PrivateScreen = ({history}) => {
     const[error, setError] = useState("");
     const[privateData, setPrivateData] = useState("");
+    const user = JSON.parse(localStorage.getItem("authToken"))
 
     console.log(localStorage)
 
@@ -16,7 +17,7 @@ const PrivateScreen = ({history}) => {
             const config = {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`
+                    Authorization: `Bearer ${user.token}`
                 }
             }
 
@@ -41,7 +42,7 @@ const PrivateScreen = ({history}) => {
         <span className="error-message">{error}</span> 
         ) : (
         <>
-        <div style={{background: "green", color: "white"}}>{privateData}</div>
+        <p>{user.result.username}</p>
         <button onClick={logoutHandler}>Logout</button>
         </>
     );
